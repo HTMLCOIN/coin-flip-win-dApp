@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <title>People</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4 text-center">Coin Flip</h1>
+        <p class="lead text-center">Try your luck!</p>
+      </div>
+    </div>
+
+    <p class="lead font-weight-normal text-center">Select Head or Tail:</p>
+    <div class="d-flex justify-content-center">
+      <img id="coin-head" class="coin" src="./head.png" alt="head" />
+      <img id="coin-tail" class="coin" src="./tail.png" alt="tail" />
+    </div>
+
+    <p class="lead font-weight-normal text-center mb-4">
+      Selection: <span class="font-weight-bold" id="coin-selection"></span>
+    </p>
+
+    <div class="d-flex justify-content-center">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter bet amount"
+          aria-label="bet-amount"
+          aria-describedby="basic-addon2"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-outline-success" type="button">
+            Flip Coin
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./index.js"></script>
+  </body>
+</html>

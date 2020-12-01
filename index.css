@@ -1,0 +1,21 @@
+img {
+  height: 150px;
+  margin: 20px;
+  cursor: pointer;
+}
+
+button {
+  width: 100px;
+}
+
+img {
+  opacity: 0.5;
+}
+
+.input-group {
+  width: 300px;
+}
+
+.selected {
+  opacity: 1;
+}
