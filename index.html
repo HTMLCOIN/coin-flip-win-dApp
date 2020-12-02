@@ -7,7 +7,21 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
 
-    <title>People</title>
+    <title>Coin Flip</title>
+
+    <!-- <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script> -->
+    <script type="text/javascript" src="./web3.min.js"></script>
+    <!-- <script type="text/javascript" src="./abi.js"></script> -->
+    <!-- <script type="text/javascript" src="./main.js"></script> -->
+    <!-- <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script> -->
 
     <link
       rel="stylesheet"
@@ -40,19 +54,89 @@
       <div class="input-group">
         <input
           type="text"
+          id="bet-input"
           class="form-control"
           placeholder="Enter bet amount"
           aria-label="bet-amount"
           aria-describedby="basic-addon2"
         />
         <div class="input-group-append">
-          <button class="btn btn-outline-success" type="button">
-            Flip Coin
+          <button id="bet-button" class="btn btn-outline-success" type="button">
+            Bet now
           </button>
         </div>
       </div>
     </div>
 
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <button id="deposit-button" class="btn btn-outline-info" type="button">
+          Deposit
+        </button>
+      </div>
+      <input
+        type="text"
+        id="deposit-amount"
+        class="form-control"
+        placeholder="Enter amount"
+        aria-label="deposit-funds"
+        aria-describedby="basic-addon1"
+      />
+      <div class="input-group-append">
+        <span class="input-group-text">ether</span>
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <button
+          id="contract-balance-button"
+          class="btn btn-outline-info"
+          type="button"
+        >
+          Contract
+        </button>
+      </div>
+      <input
+        type="text"
+        id="contract-balance"
+        class="form-control"
+        placeholder=""
+        aria-label="contract-balance"
+        aria-describedby="basic-addon1"
+        disabled
+      />
+      <div class="input-group-append">
+        <span class="input-group-text">ether</span>
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <button id="withdraw-button" class="btn btn-outline-info" type="button">
+          Withdraw
+        </button>
+      </div>
+      <input
+        type="text"
+        id="withdraw-amount"
+        class="form-control"
+        placeholder="Enter amount"
+        aria-label="refresh-balance"
+        aria-describedby="basic-addon1"
+      />
+      <div class="input-group-append">
+        <span class="input-group-text">ether</span>
+      </div>
+    </div>
+
+    <button id="withdraw-all-button" class="btn btn-outline-info" type="button">
+      Withdraw All
+    </button>
+
     <script src="./index.js"></script>
+    <script src="./web3.min.js"></script>
+    <script src="./abi.js"></script>
+    <script src="./main.js"></script>
   </body>
 </html>
