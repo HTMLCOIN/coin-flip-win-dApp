@@ -1,6 +1,5 @@
 img {
   height: 150px;
-  margin: 20px;
   cursor: pointer;
 }
 
@@ -18,4 +17,8 @@ img {
 
 .selected {
   opacity: 1;
+}
+
+.make-bet {
+  width: 300px;
 }

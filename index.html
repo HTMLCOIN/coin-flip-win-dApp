@@ -7,21 +7,26 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
 
-    <title>Coin Flip</title>
-
-    <!-- <script
-      src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
       crossorigin="anonymous"
-    ></script> -->
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>Coin Flip</title>
     <script type="text/javascript" src="./web3.min.js"></script>
     <!-- <script type="text/javascript" src="./abi.js"></script> -->
     <!-- <script type="text/javascript" src="./main.js"></script> -->
-    <!-- <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-      crossorigin="anonymous"
-    ></script> -->
 
     <link
       rel="stylesheet"
@@ -40,99 +45,141 @@
       </div>
     </div>
 
-    <p class="lead font-weight-normal text-center">Select Head or Tail:</p>
+    <!-- <p class="lead font-weight-normal text-center">Select Head or Tail:</p> -->
     <div class="d-flex justify-content-center">
-      <img id="coin-head" class="coin" src="./head.png" alt="head" />
-      <img id="coin-tail" class="coin" src="./tail.png" alt="tail" />
+      <img id="coin-head" class="coin m-2" src="./head.png" alt="head" />
+      <img id="coin-tail" class="coin m-2" src="./tail.png" alt="tail" />
     </div>
 
     <p class="lead font-weight-normal text-center mb-4">
-      Selection: <span class="font-weight-bold" id="coin-selection"></span>
+      Selected: <span class="font-weight-bold" id="coin-selection"></span>
     </p>
 
     <div class="d-flex justify-content-center">
       <div class="input-group">
         <input
           type="text"
-          id="bet-input"
+          id="betAmountInput"
           class="form-control"
-          placeholder="Enter bet amount"
-          aria-label="bet-amount"
-          aria-describedby="basic-addon2"
+          aria-label="Text input with dropdown button"
         />
         <div class="input-group-append">
-          <button id="bet-button" class="btn btn-outline-success" type="button">
-            Bet now
+          <button
+            class="btn btn-outline-info dropdown-toggle"
+            type="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            id="coinOption"
+          >
+            Options
           </button>
+          <div class="dropdown-menu">
+            <button
+              class="dropdown-item text-left"
+              type="button"
+              onclick="showGenre(this)"
+            >
+              wei&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </button>
+            <button
+              class="dropdown-item"
+              type="button"
+              onclick="showGenre(this)"
+            >
+              gwei&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </button>
+            <button
+              class="dropdown-item"
+              type="button"
+              onclick="showGenre(this)"
+            >
+              finney&nbsp;&nbsp;&nbsp;
+            </button>
+            <button
+              class="dropdown-item"
+              type="button"
+              onclick="showGenre(this)"
+            >
+              ether&nbsp;&nbsp;&nbsp;&nbsp;
+            </button>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <button id="deposit-button" class="btn btn-outline-info" type="button">
-          Deposit
-        </button>
-      </div>
-      <input
-        type="text"
-        id="deposit-amount"
-        class="form-control"
-        placeholder="Enter amount"
-        aria-label="deposit-funds"
-        aria-describedby="basic-addon1"
-      />
-      <div class="input-group-append">
-        <span class="input-group-text">ether</span>
-      </div>
+    <div class="d-flex justify-content-center">
+      <button id="makeBetButton" class="btn btn-success m-4 make-bet">
+        Make Bet
+      </button>
     </div>
 
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <button
-          id="contract-balance-button"
-          class="btn btn-outline-info"
-          type="button"
-        >
-          Contract
-        </button>
+    <div class="d-flex flex-column align-items-center mt-5">
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <button id="depositButton" class="btn btn-outline-info" type="button">
+            Deposit
+          </button>
+        </div>
+        <input
+          type="text"
+          id="depositAmount"
+          class="form-control"
+          placeholder="Enter amount"
+          aria-label="deposit-funds"
+          aria-describedby="basic-addon1"
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">ether</span>
+        </div>
       </div>
-      <input
-        type="text"
-        id="contract-balance"
-        class="form-control"
-        placeholder=""
-        aria-label="contract-balance"
-        aria-describedby="basic-addon1"
-        disabled
-      />
-      <div class="input-group-append">
-        <span class="input-group-text">ether</span>
-      </div>
-    </div>
 
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <button id="withdraw-button" class="btn btn-outline-info" type="button">
-          Withdraw
-        </button>
+      <div class="input-group mb-2">
+        <input
+          type="text"
+          id="contract-balance"
+          class="form-control"
+          placeholder=""
+          aria-label="contract-balance"
+          aria-describedby="basic-addon1"
+          disabled
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">ether</span>
+        </div>
       </div>
-      <input
-        type="text"
-        id="withdraw-amount"
-        class="form-control"
-        placeholder="Enter amount"
-        aria-label="refresh-balance"
-        aria-describedby="basic-addon1"
-      />
-      <div class="input-group-append">
-        <span class="input-group-text">ether</span>
-      </div>
-    </div>
 
-    <button id="withdraw-all-button" class="btn btn-outline-info" type="button">
-      Withdraw All
-    </button>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <button
+            id="withdraw-button"
+            class="btn btn-outline-info"
+            type="button"
+          >
+            Withdraw
+          </button>
+        </div>
+        <input
+          type="text"
+          id="withdraw-amount"
+          class="form-control"
+          placeholder="Enter amount"
+          aria-label="refresh-balance"
+          aria-describedby="basic-addon1"
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">ether</span>
+        </div>
+      </div>
+
+      <button
+        id="withdraw-all-button"
+        class="btn btn-outline-info"
+        type="button"
+      >
+        Withdraw All
+      </button>
+    </div>
 
     <script src="./index.js"></script>
     <script src="./web3.min.js"></script>
