@@ -1,16 +1,19 @@
 let coinOption;
 let isHeadSelected;
 const betInput = document.getElementById('betAmountInput');
+const makeBetButton = document.getElementById('makeBetButton');
 betInput.setAttribute('disabled', 'true');
+makeBetButton.setAttribute('disabled', 'true');
 
 function showGenre(item) {
   betInput.removeAttribute('disabled');
+  makeBetButton.removeAttribute('disabled');
   coinOption = item.textContent.trim();
   document.getElementById("coinOption").innerHTML = item.innerHTML;
 }
 
 const web3 = new Web3(Web3.givenProvider);
-const CONTRACT_ADDRESS = '0x11180B9941b8b88Dda52C6FCEB283F7F1D6E2Ba8';
+const CONTRACT_ADDRESS = '0x0ADFE7ADea091344C0f9772A55Bc324056c03BBC';
 let contractInstance;
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -50,7 +53,6 @@ const selectTail = (head, tail, coinSelection) => {
 const depositFunds = () => {
   console.log('depositFunds');
   const depositAmount = (document.getElementById("depositAmount").value).trim();
-  console.log('depositAmount', depositAmount);
   if (isNaN(depositAmount)) {
     return;
   }
@@ -62,7 +64,7 @@ const depositFunds = () => {
     .on('confirmation', confNum => console.log('Confirmation number: ', confNum))
     .on('receipt', receipt => {
       getContractBalance();
-      console.log('Receipt: ', receipt)
+      console.log('Receipt depositFunds: ', receipt);
     });
 }
 
@@ -85,7 +87,7 @@ const withdraw = () => {
     .on('confirmation', confNum => console.log('Confirmation number: ', confNum))
     .on('receipt', receipt => {
       getContractBalance();
-      console.log('Receipt withdraw: ', receipt)
+      console.log('Receipt withdraw: ', receipt);
     });
 }
 
@@ -95,7 +97,7 @@ const withdrawAll = () => {
     .on('confirmation', confNum => console.log('Confirmation number: ', confNum))
     .on('receipt', receipt => {
       getContractBalance();
-      console.log('Receipt withdraw all: ', receipt)
+      console.log('Receipt withdrawAll: ', receipt);
     });
 }
 
@@ -116,6 +118,11 @@ const makeBet = () => {
     .on('confirmation', confNum => console.log('Conf. number: ', confNum))
     .on('receipt', receipt => {
       getContractBalance();
-      console.log('Receipt after bet: ', receipt)
+      console.log('Receipt makeBet: ', receipt);
+      if (Object.keys(receipt.events).length) {
+        console.log('You won!');
+      } else {
+        console.log('You lost...');
+      }
     });
 }
