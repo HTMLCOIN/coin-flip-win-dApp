@@ -13,7 +13,7 @@ function showGenre(item) {
 }
 
 const web3 = new Web3(Web3.givenProvider);
-const CONTRACT_ADDRESS = '0x0ADFE7ADea091344C0f9772A55Bc324056c03BBC';
+const CONTRACT_ADDRESS = '0x9a73702dd209a3C249Cc8B860D0dfF61fEf65fa9';
 let contractInstance;
 
 window.addEventListener('DOMContentLoaded', () => {
