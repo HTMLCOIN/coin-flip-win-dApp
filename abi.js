@@ -1,38 +1,27 @@
 const abi = [
   {
     "inputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "constructor"
+    "stateMutability": "payable",
+    "type": "constructor",
+    "payable": true
   },
   {
-    "constant": true,
+    "anonymous": false,
     "inputs": [],
-    "name": "balance",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
+    "name": "betWon",
+    "type": "event"
   },
   {
-    "constant": false,
     "inputs": [],
     "name": "depositFunds",
     "outputs": [],
-    "payable": true,
     "stateMutability": "payable",
-    "type": "function"
+    "type": "function",
+    "payable": true
   },
   {
-    "constant": true,
     "inputs": [],
-    "name": "getContractBalance",
+    "name": "getAvailableContractBalance",
     "outputs": [
       {
         "internalType": "uint256",
@@ -40,12 +29,25 @@ const abi = [
         "type": "uint256"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
-    "constant": false,
+    "inputs": [],
+    "name": "getTotalContractBalance",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -53,22 +55,15 @@ const abi = [
         "type": "uint256"
       }
     ],
-    "name": "withdraw",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": true,
+    "name": "withdrawContractBalance",
+    "outputs": [],
     "stateMutability": "payable",
-    "type": "function"
+    "type": "function",
+    "payable": true
   },
   {
-    "constant": false,
     "inputs": [],
-    "name": "withdrawAll",
+    "name": "getPlayerBalance",
     "outputs": [
       {
         "internalType": "uint256",
@@ -76,20 +71,35 @@ const abi = [
         "type": "uint256"
       }
     ],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "coinSide",
+        "name": "amount",
         "type": "uint256"
       }
     ],
+    "name": "withdrawPlayerBalance",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function",
+    "payable": true
+  },
+  {
+    "inputs": [],
     "name": "makeBet",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function",
+    "payable": true
+  },
+  {
+    "inputs": [],
+    "name": "random",
     "outputs": [
       {
         "internalType": "uint256",
@@ -97,8 +107,22 @@ const abi = [
         "type": "uint256"
       }
     ],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
+    "name": "isOwner",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
   }
 ];

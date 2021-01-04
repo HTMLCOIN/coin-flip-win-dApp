@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-
+    <title>Coin Flip</title>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -22,88 +22,157 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-
-    <title>Coin Flip</title>
-    <script type="text/javascript" src="./web3.min.js"></script>
-    <!-- <script type="text/javascript" src="./abi.js"></script> -->
-    <!-- <script type="text/javascript" src="./main.js"></script> -->
-
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
-
     <link rel="stylesheet" href="./index.css" />
+    <script type="text/javascript" src="./web3.min.js"></script>
   </head>
   <body>
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4 text-center">Coin Flip</h1>
-        <p class="lead text-center">Try your luck!</p>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Coin Flip</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span id="playerBalance">0 </span> ETH (player)
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <div class="dropdown-item input-group">
+                <span id="playerAddress"></span>
+              </div>
+
+              <div class="dropdown-item input-group">
+                <div class="input-group-prepend">
+                  <button
+                    class="btn btn-outline-danger"
+                    type="button"
+                    id="withdrawPlayerBalance"
+                  >
+                    Withdraw
+                  </button>
+                </div>
+                <input
+                  id="withdrawPlayerAmount"
+                  type="text"
+                  class="form-control"
+                  placeholder="ETH amount"
+                  aria-label="Withdraw player amount button"
+                  aria-describedby="withdraw player amount"
+                />
+              </div>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span id="contractBalance">0 </span> ETH (contract)
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <div class="dropdown-item input-group">
+                <span id="contractAddress"></span>
+              </div>
+
+              <div class="dropdown-item input-group">
+                <div class="input-group-prepend">
+                  <button
+                    class="btn btn-outline-success"
+                    type="button"
+                    id="depositButton"
+                  >
+                    Deposit
+                  </button>
+                </div>
+                <input
+                  id="depositAmount"
+                  type="text"
+                  class="form-control"
+                  placeholder="ETH amount"
+                  aria-label="Example text with button addon"
+                  aria-describedby="depositButton"
+                />
+              </div>
+
+              <div class="dropdown-item input-group">
+                <div class="input-group-prepend">
+                  <button
+                    class="btn btn-outline-danger"
+                    type="button"
+                    id="withdrawContractBalance"
+                  >
+                    Withdraw
+                  </button>
+                </div>
+                <input
+                  id="withdrawContractAmount"
+                  type="text"
+                  class="form-control"
+                  placeholder="ETH amount"
+                  aria-label="Withdraw contract amount button"
+                  aria-describedby="withdraw contract amount"
+                />
+              </div>
+            </div>
+          </li>
+        </ul>
+        <span class="navbar-text" id="ifOwner"></span>
       </div>
-    </div>
-
-    <!-- <p class="lead font-weight-normal text-center">Select Head or Tail:</p> -->
-    <div class="d-flex justify-content-center">
-      <img id="coin-head" class="coin m-2" src="./head.png" alt="head" />
-      <img id="coin-tail" class="coin m-2" src="./tail.png" alt="tail" />
-    </div>
-
-    <p class="lead font-weight-normal text-center mb-4">
-      Selected: <span class="font-weight-bold" id="coin-selection"></span>
-    </p>
+    </nav>
 
     <div class="d-flex justify-content-center">
-      <div class="input-group">
+      <img id="ethLogo" class="m-5" src="./eth-logo.png" alt="eth logo" />
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <div class="input-group mb-2">
         <input
           type="text"
           id="betAmountInput"
           class="form-control"
-          aria-label="Text input with dropdown button"
+          placeholder="Enter bet amount"
+          aria-label="contract-balance"
+          aria-describedby="basic-addon1"
         />
         <div class="input-group-append">
-          <button
-            class="btn btn-outline-info dropdown-toggle"
-            type="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            id="coinOption"
-          >
-            Options
-          </button>
-          <div class="dropdown-menu">
-            <button
-              class="dropdown-item text-left"
-              type="button"
-              onclick="showGenre(this)"
-            >
-              wei&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </button>
-            <button
-              class="dropdown-item"
-              type="button"
-              onclick="showGenre(this)"
-            >
-              gwei&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </button>
-            <button
-              class="dropdown-item"
-              type="button"
-              onclick="showGenre(this)"
-            >
-              finney&nbsp;&nbsp;&nbsp;
-            </button>
-            <button
-              class="dropdown-item"
-              type="button"
-              onclick="showGenre(this)"
-            >
-              ether&nbsp;&nbsp;&nbsp;&nbsp;
-            </button>
-          </div>
+          <p class="input-group-text">
+            <img
+              class="eth-logo-small"
+              src="./eth-logo-small.png"
+              alt="eth logo"
+            />
+            <span class="ml-1">ETH</span>
+          </p>
         </div>
       </div>
     </div>
@@ -114,76 +183,8 @@
       </button>
     </div>
 
-    <div class="d-flex flex-column align-items-center mt-5">
-      <div class="input-group mb-2">
-        <div class="input-group-prepend">
-          <button id="depositButton" class="btn btn-outline-info" type="button">
-            Deposit
-          </button>
-        </div>
-        <input
-          type="text"
-          id="depositAmount"
-          class="form-control"
-          placeholder="Enter amount"
-          aria-label="deposit-funds"
-          aria-describedby="basic-addon1"
-        />
-        <div class="input-group-append">
-          <span class="input-group-text">ether</span>
-        </div>
-      </div>
-
-      <div class="input-group mb-2">
-        <input
-          type="text"
-          id="contract-balance"
-          class="form-control"
-          placeholder=""
-          aria-label="contract-balance"
-          aria-describedby="basic-addon1"
-          disabled
-        />
-        <div class="input-group-append">
-          <span class="input-group-text">ether</span>
-        </div>
-      </div>
-
-      <div class="input-group mb-2">
-        <div class="input-group-prepend">
-          <button
-            id="withdraw-button"
-            class="btn btn-outline-info"
-            type="button"
-          >
-            Withdraw
-          </button>
-        </div>
-        <input
-          type="text"
-          id="withdraw-amount"
-          class="form-control"
-          placeholder="Enter amount"
-          aria-label="refresh-balance"
-          aria-describedby="basic-addon1"
-        />
-        <div class="input-group-append">
-          <span class="input-group-text">ether</span>
-        </div>
-      </div>
-
-      <button
-        id="withdraw-all-button"
-        class="btn btn-outline-info"
-        type="button"
-      >
-        Withdraw All
-      </button>
-    </div>
-
     <script src="./index.js"></script>
     <script src="./web3.min.js"></script>
     <script src="./abi.js"></script>
-    <script src="./main.js"></script>
   </body>
 </html>
