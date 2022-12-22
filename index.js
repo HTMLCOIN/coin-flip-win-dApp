@@ -75,7 +75,7 @@ const getContractBalance = () => {
 const getPlayerBalance = () => {
   contractInstance.methods.getPlayerBalance().call()
     .then(response => {
-      const playerBalance = web3.utils.fromWei(response, 'ether');
+      const playerBalance = (web3.utils.fromWei(response, 'ether'))*10**10;
       document.getElementById("playerBalance").innerText = playerBalance;
       document.getElementById("withdrawPlayerAmount").value = playerBalance;
     })
