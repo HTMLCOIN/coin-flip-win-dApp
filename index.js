@@ -1,14 +1,23 @@
-const web3 = new Web3(Web3.givenProvider);
-const CONTRACT_ADDRESS = '0x9C8b0a4b76E47D5EABF559298cdC3F1e95EFAA73';
+if (window.altmasq) {
+  window.web3 = new Web3(window.altmasq);
+} else if (window.web3) {
+  window.web3 = new Web3(window.web3.currentProvider);
+} else {
+  window.alert(
+    "Non-Altmasq browser detected. You should consider trying Altmasq!"
+  );
+}
+const CONTRACT_ADDRESS = '0xa50aaabf8996b359d49b4e28797d21e415a30dcf';
 let contractInstance;
 
+
 window.addEventListener('DOMContentLoaded', () => {
-  window.ethereum.enable().then((accounts) => {
+  window.altmasq.enable().then((accounts) => {
     console.log(accounts);
     contractInstance = new web3.eth.Contract(abi, CONTRACT_ADDRESS, { from: accounts[0] });
     updateStats(accounts[0]);
   })
-  
+
   document.getElementById('makeBetButton').addEventListener('click', makeBet);
   document.getElementById('depositButton').addEventListener('click', depositFunds);
   document.getElementById("withdrawPlayerBalance").addEventListener('click', withdrawPlayerBalance);
@@ -57,7 +66,7 @@ const depositFunds = () => {
 const getContractBalance = () => {
   contractInstance.methods.getAvailableContractBalance().call()
     .then(response => {
-      const contractBalance = web3.utils.fromWei(response, 'ether');
+      const contractBalance = (web3.utils.fromWei(response, 'ether'))*10**10;
       document.getElementById("contractBalance").innerText = contractBalance;
       document.getElementById("withdrawContractAmount").value = contractBalance;
     })
